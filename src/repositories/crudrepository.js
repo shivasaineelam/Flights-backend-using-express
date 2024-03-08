@@ -13,13 +13,9 @@ class crudRepository {
       throw error;
     }
   }
-  async destory(data) {
+  async destroy(data) {
     try {
-      const response = await this.model.destory({
-        Where: {
-          id: data,
-        },
-      });
+      const response = await this.model.destroy({ where: { id: data } });
       return response;
     } catch (error) {
       throw error;
@@ -27,7 +23,7 @@ class crudRepository {
   }
   async get(data) {
     try {
-      const response = await this.model.findbyPK(data);
+      const response = await this.model.findByPk(data);
       return response;
     } catch (error) {
       throw error;
@@ -35,13 +31,13 @@ class crudRepository {
   }
   async getall() {
     try {
-      const response = await this.model.find();
+      const response = await this.model.findAll();
       return response;
     } catch (error) {
       throw error;
     }
   }
-  async update(id, data) {
+  async update(data, id) {
     try {
       const response = await this.model.update(data, { where: { id: id } });
       return response;
