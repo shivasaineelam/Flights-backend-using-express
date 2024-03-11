@@ -1,13 +1,13 @@
-const { airplane } = require("../models/airplane");
+const { airport } = require("../models/airplane");
 const { appError } = require("../utils/errors");
 const { StatusCodes } = require("http-status-codes");
-const { airplaneRepository } = require("./../repositories");
+const { airportRepository } = require("./../repositories");
 
-const airplanerepository = new airplaneRepository(airplane);
+const airportrepository = new airportRepository(airport);
 
-const ariplaneCreateService = async (data) => {
+const ariportCreateService = async (data) => {
   try {
-    const response = await airplanerepository.create(data);
+    const response = await airportrepository.create(data);
     return response;
   } catch (error) {
     let explaination = [];
@@ -26,9 +26,9 @@ const ariplaneCreateService = async (data) => {
     );
   }
 };
-const airplaneDeleteService = async (data) => {
+const airportDeleteService = async (data) => {
   try {
-    const response = await airplanerepository.destroy(data);
+    const response = await airportrepository.destroy(data);
     return response;
   } catch (error) {
     throw new appError(
@@ -37,9 +37,9 @@ const airplaneDeleteService = async (data) => {
     );
   }
 };
-const getAllAirplaneService = async (data) => {
+const getAllAirportService = async (data) => {
   try {
-    const response = await airplanerepository.getAll();
+    const response = await airportrepository.getAll();
     return response;
   } catch (error) {
     throw new appError(
@@ -48,9 +48,9 @@ const getAllAirplaneService = async (data) => {
     );
   }
 };
-const getAirplanebyIdService = async (data) => {
+const getAirportbyIdService = async (data) => {
   try {
-    const response = await airplanerepository.get(data);
+    const response = await airportrepository.get(data);
     return response;
   } catch (error) {
     throw new appError(
@@ -59,9 +59,9 @@ const getAirplanebyIdService = async (data) => {
     );
   }
 };
-const updateAirplaneService = async (data, id) => {
+const updateAirportService = async (data, id) => {
   try {
-    const response = await airplanerepository.update(data, id);
+    const response = await airportrepository.update(data, id);
     return response;
   } catch (error) {
     throw new appError(
@@ -71,9 +71,9 @@ const updateAirplaneService = async (data, id) => {
   }
 };
 module.exports = {
-  ariplaneCreateService,
-  airplaneDeleteService,
-  getAllAirplaneService,
-  getAirplanebyIdService,
-  updateAirplaneService,
+  ariportCreateService,
+  airportDeleteService,
+  getAllAirportService,
+  getAirportbyIdService,
+  updateAirportService,
 };

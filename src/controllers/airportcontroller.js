@@ -1,12 +1,14 @@
-const { airplaneservice } = require("./../services");
+const { airportService } = require("./../services");
 const { StatusCodes } = require("http-status-codes");
 const { errorResponse, successResponse } = require("./../utils/response/");
 
-const createAirplane = async (req, res) => {
+const createAirport = async (req, res) => {
   try {
-    const response = await airplaneservice.ariplaneCreateService({
-      modelNumber: req.body.modelNumber,
-      capacity: req.body.capacity,
+    const response = await airportService.ariportCreateService({
+      name: req.body.name,
+      code: req.body.code,
+      address: req.body.address,
+      cityId: req.body.cityId,
     });
     successResponse.data = response;
     res.json(successResponse).status(StatusCodes.CREATED);
@@ -16,9 +18,9 @@ const createAirplane = async (req, res) => {
   }
 };
 
-const deleteAirplane = async (req, res) => {
+const deleteAirport = async (req, res) => {
   try {
-    const response = await airplaneservice.airplaneDeleteService(req.params.id);
+    const response = await airportService.airportDeleteService(req.params.id);
     if (response == 1) successResponse.data = "succesfully deleted the airport";
     else {
       successResponse.data = "request not completed";
@@ -33,9 +35,9 @@ const deleteAirplane = async (req, res) => {
   }
 };
 
-const getAllAirplane = async (req, res) => {
+const getAllAirport = async (req, res) => {
   try {
-    const response = await airplaneservice.getAllAirplaneService();
+    const response = await airportService.getAllAirportService();
     successResponse.data = response;
     res.send(successResponse);
   } catch (error) {
@@ -43,25 +45,24 @@ const getAllAirplane = async (req, res) => {
   }
 };
 
-const getByAirplaneId = async (req, res) => {
+const getByAirportId = async (req, res) => {
   try {
-    const response = await airplaneservice.getAirplanebyIdService(
-      req.params.id
-    );
+    const response = await airportService.getAirportbyIdService(req.params.id);
     console.log(response);
     if (response === null)
-      successResponse.message = "please enter a valid airplane id";
+      successResponse.message = "please enter a valid airport id";
     successResponse.data = response;
-    res.json(successResponse);
+    res.json(successResponse).status(StatusCodes.CREATED);
   } catch (error) {
+    console.log(error);
     errorResponse.error = error;
     res.status(error.statusCode).json(errorResponse);
   }
 };
 
-const updateAirplane = async (req, res) => {
+const updateAirport = async (req, res) => {
   try {
-    const response = await airplaneservice.updateAirplaneService(
+    const response = await airportService.updateAirportService(
       req.body.data,
       req.body.id
     );
@@ -73,9 +74,9 @@ const updateAirplane = async (req, res) => {
 };
 
 module.exports = {
-  createAirplane,
-  deleteAirplane,
-  getAllAirplane,
-  getByAirplaneId,
-  updateAirplane,
+  createAirport,
+  deleteAirport,
+  getAllAirport,
+  getByAirportId,
+  updateAirport,
 };
